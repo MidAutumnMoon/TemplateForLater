@@ -1,0 +1,12 @@
+libs = $
+    -lsodium $
+    -lzmq
+
+rule cc
+    command = cc -Wall -fcolor-diagnostics $libs $in -o $out
+
+rule execute
+    command = bash -c "exec ./$in"
+
+build a : cc a.c
+build runit : execute a
